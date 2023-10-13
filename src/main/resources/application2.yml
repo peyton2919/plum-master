@@ -1,0 +1,68 @@
+# 开发环境配置
+spring:
+  datasource:
+    dynamic:
+      druid:
+        initial-size: 10
+        # 初始化大小，最小，最大
+        min-idle: 20
+        maxActive: 500
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        testWhileIdle: true
+        testOnBorrow: true
+        validation-query: SELECT 1
+        testOnReturn: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        filters: stat,wall
+        filter:
+          wall:
+            config:
+              multi-statement-allow: true
+              none-base-statement-allow: true
+            enabled: true
+        # 配置DruidStatFilter
+        web-stat-filter:
+          enabled: true
+          url-pattern: "/*"
+          exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+        # 配置DruidStatViewServlet
+        stat-view-servlet:
+          enabled: true
+          url-pattern: "/druid/*"
+          # IP白名单(没有配置或者为空，则允许所有访问)
+          allow: #127.0.0.1,192.168.163.1
+          # IP黑名单 (存在共同时，deny优先于allow)
+          deny: #192.168.1.73
+          #  禁用HTML页面上的“Reset All”功能
+          reset-enable: false
+          # 登录名
+          login-username: admin
+          # 登录密码
+
+          login-password: 111111
+        query-timeout: 36000
+      primary: test
+      strict: false
+      datasource:
+        test:
+          url: jdbc:mysql://127.0.0.1:3306/db_chatter?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=GMT%2B8
+          username: root
+          password: root
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        test_01:
+          url: jdbc:mysql://127.0.0.1:3306/db_test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=GMT%2B8
+          username: root
+          password: root
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        test_02:
+          url: jdbc:mysql://127.0.0.1:3306/db_test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=GMT%2B8
+          username: root
+          password: root
+          driver-class-name: com.mysql.cj.jdbc.Driver

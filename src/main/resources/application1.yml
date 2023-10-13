@@ -1,0 +1,101 @@
+server:
+  port: 8080
+
+spring:
+  thymeleaf:
+    cache: false  # \u662F\u5426\u5F00\u542F\u7F13\u5B58\uFF0C\u9ED8\u8BA4true
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    prefix: classpath:/templates/   # \u524D\u7F00
+    suffix: .html   # \u540E\u7F00
+    check-template: true    # \u68C0\u67E5\u6A21\u677F\u662F\u5426\u5B58\u5728\uFF0C\u9ED8\u8BA4true
+    check-template-location: true     #\u68C0\u67E5\u6A21\u677F\u4F4D\u7F6E\u662F\u5426\u5B58\u5728\uFF0C\u9ED8\u8BA4true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      # 主库数据源
+      master:
+        url: jdbc:mysql://localhost:3306/db_chatter?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+        username: root
+        password: hc2919
+
+      # 从库数据源
+      slave:
+        enabled: false
+        url: jdbc:mysql://localhost:3306/db_test?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+        username: root
+        password: hc2919
+      # 初始连接数
+      initialSize: 5
+      # 最小连接池数量
+      minIdle: 10
+      # 最大连接池数量
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      maxEvictableIdleTimeMillis: 900000
+      rewriteBatchedStatements: true
+      # 配置检测连接是否有效
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+
+
+  web:
+    resources:
+      static-locations: classpath:/resources/,classpath:/static/,classpath:/public/  # classpath:/META-INF/resources/,
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+    hiddenmethod:
+      filter:
+        enabled: true   # \u8BBE\u7F6E\u5F00\u542FRESTFul\u98CE\u683C
+  servlet:
+    multipart:
+      max-file-size: 500KB  # \u8BBE\u7F6E\u6587\u4EF6\u4E0A\u4F20\u5927\u5C0F\u7684\u9650\u5236
+      max-request-size: 2MB # \u6587\u4EF6\u6700\u5927\u8BF7\u6C42\u9650\u5236\uFF0C\u7528\u4E8E\u6279\u91CF
+  mail:
+    host: smtp.tom.com
+    username: fz2919
+    password: 123456
+    protocol: smtp
+    default-encoding: UTF-8
+    port: 8081
+  messages:
+    basename: i18n.login
+  data:
+    redis:
+      # Redis服务器地址
+      host: 127.0.0.1
+      # Redis服务器端口号
+      port: 6379
+      # 使用的数据库索引，默认是0
+      database: 0
+      # 连接超时时间
+      timeout: 1800000
+      # 设置密码
+      password: hc2919
+      lettuce:
+        pool:
+          # 最大阻塞等待时间，负数表示没有限制
+          max-wait: -1
+          # 连接池中的最大空闲连接
+          max-idle: 5
+          # 连接池中的最小空闲连接
+          min-idle: 0
+          # 连接池中最大连接数，负数表示没有限制
+          max-active: 20
+
+
+mybatis:
+  mapper-locations: classpath:mappers/*Mapper.xml   # \u6240\u6709 mapper \u6620\u5C04\u7684\u6587\u4EF6\u6240\u5728\u76EE\u5F55\u4F4D\u7F6E cn/peyton/children/chatter/
+  type-aliases-package: cn.peyton.**.pojo   # \u6240\u6709\u6570\u636E\u5E93\u8868\u9006\u5411\u540E\u6240--\u6620\u5C04\u7684\u5B9E\u4F53\u7C7B Entity/Bean/POJO
