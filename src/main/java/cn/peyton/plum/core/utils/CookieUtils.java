@@ -117,7 +117,7 @@ public final class CookieUtils implements Serializable {
         try {
             URLEncoder.encode(value, "utf-8");
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LogUtils.error(e.getMessage());
         }
         if (null != domain && !"".equals(domain)) {
             cookie.setDomain(domain);

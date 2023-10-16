@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>登录首页</title>
+</head>
+
+<body class="text-center">
+<form class="form-signin" action="/api/user/imgs/uploadmore" enctype="multipart/form-data" method="post">
+    <h1 class="h3 mb-3 font-weight-normal" th:text="#{login.tip}">Please sign in</h1>
+    <label th:text="#{login.username}"></label>
+    <input type="text" class="form-control" th:placeholder="#{login.username}" required="" autofocus=""><br>
+
+    <label th:text="#{login.password}"></label>
+    <input type="password" class="form-control" th:placeholder="#{login.password}" required="">
+
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me" th:text="#{login.remember_me}">
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.button}">Sign in</button>
+    <div>
+        <a class="btn btn-sm" th:href="@{/test2(lang='zh_CN')}" style="margin-right: 30px;">中文</a>
+        <a class="btn btn-sm" th:href="@{/test2(lang='en_US')}">English</a>
+    </div>
+
+
+</form>
+</body>
+</html>

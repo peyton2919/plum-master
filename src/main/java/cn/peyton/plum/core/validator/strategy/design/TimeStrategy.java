@@ -1,6 +1,6 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.Regulation;
 import cn.peyton.plum.core.validator.constraints.Time;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
@@ -23,7 +23,7 @@ public class TimeStrategy extends AbstractValidator {
     public void compare(Annotation annotation, String name, String type, Object value, Map<String, String> map) {
         Time time = (Time) annotation;
         message = time.message();
-        if (CheckedUtils.isEmpty(value)) {
+        if (StrUtils.isEmpty(value)) {
             if (regex(value.toString(), Regulation.REGEX_SIMPLE_TIME)) {
                 map.put(name, message);
             }

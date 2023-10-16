@@ -1,6 +1,6 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.Regulation;
 import cn.peyton.plum.core.validator.constraints.Date;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
@@ -23,7 +23,7 @@ public class DateStrategy extends AbstractValidator {
     public void compare(Annotation annotation, String name, String type, Object value, Map<String, String> map) {
         Date date = (Date) annotation;
         message = date.message();
-        if (CheckedUtils.isEmpty(value)) {
+        if (StrUtils.isEmpty(value)) {
             if (regex(value.toString(), Regulation.REGEX_DATE)) {
                 map.put(name, message);
             }

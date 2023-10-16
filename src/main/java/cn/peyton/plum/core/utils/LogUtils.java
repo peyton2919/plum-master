@@ -23,20 +23,22 @@ public final class LogUtils implements Serializable {
      * <4>异常写入 log中 </4>
      * @param depict 异常描述
      */
-    public static void error(Object depict) {
+    public static void error(Object... depict) {
         Throwable _throwable = new Throwable();
-        log.error("[ (自定义) -> (异常>) ] 在类: {},方法名: {},所在应类行号: {}。原因: 【{}】",
-                getClassName(_throwable), getMethodName(_throwable), getLineNumber(_throwable), depict);
+        log.error(">>>>>> [ (自定义) -> (异常>) ] 在类: {},方法名: {},所在应类行号: {}。原因: 【{}】",
+                getClassName(_throwable), getMethodName(_throwable), getLineNumber(_throwable),
+                StrUtils.convertList2Str(depict));
     }
 
     /**
      * <4>信息写入 log中 </4>
      * @param depict 信息描述
      */
-    public static void info(Object depict) {
+    public static void info(Object... depict) {
         Throwable _throwable = new Throwable();
-        log.info("[ (自定义) -> (信息) ] 在类: {},方法名: {},所在应类行号: {}。原因: 【{}】",
-                getClassName(_throwable), getMethodName(_throwable), getLineNumber(_throwable), depict);
+        log.info(">>>>>> [ (自定义) -> (信息) ] 在类: {},方法名: {},所在应类行号: {}。原因: 【{}】",
+                getClassName(_throwable), getMethodName(_throwable), getLineNumber(_throwable),
+                StrUtils.convertList2Str(depict));
     }
 
     /**

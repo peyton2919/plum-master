@@ -1,7 +1,7 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
 import cn.peyton.plum.core.utils.LogUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.constraints.Max;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
 
@@ -28,7 +28,7 @@ public class MaxStrategy extends AbstractValidator {
         Max max = (Max) annotation;
         message = max.message();
         Long num = max.value();
-        if (CheckedUtils.isEmpty(value)) {
+        if (StrUtils.isEmpty(value)) {
             try {
                 Integer va = Integer.valueOf(value.toString());
                 Integer temp = num.intValue();

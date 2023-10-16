@@ -1,7 +1,7 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
 import cn.peyton.plum.core.utils.LogUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.Regulation;
 import cn.peyton.plum.core.validator.constraints.Past;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
@@ -31,7 +31,7 @@ public class PastStrategy extends AbstractValidator {
             return;
         }
         message = future.message();
-        if (CheckedUtils.isEmpty(value)) {
+        if (StrUtils.isEmpty(value)) {
             if (regex(value.toString(), reg)) {
                 map.put(name, "日期格式匹配出错了!");
                 return;

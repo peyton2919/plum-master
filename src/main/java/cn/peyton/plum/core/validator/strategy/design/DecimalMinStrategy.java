@@ -1,6 +1,6 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.constraints.DecimalMin;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
 
@@ -29,7 +29,7 @@ public class DecimalMinStrategy extends AbstractValidator {
         DecimalMin decimalMin = (DecimalMin) annotation;
         message = decimalMin.message();
         BigDecimal min = new BigDecimal(decimalMin.value());
-        if (CheckedUtils.isEmpty(value)) {
+        if (StrUtils.isEmpty(value)) {
             BigDecimal bigDecimal = new BigDecimal(value.toString());
             if (bigDecimal.compareTo(min) < 0) {
                 map.put(name, message);

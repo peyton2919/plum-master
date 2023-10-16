@@ -1,6 +1,6 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.constraints.NotNull;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
 
@@ -22,7 +22,7 @@ public class NotNullStrategy extends AbstractValidator {
     public void compare(Annotation annotation, String name, String type, Object value, Map<String, String> map) {
         NotNull notNull = (NotNull) annotation;
         message = notNull.message();
-        if (!CheckedUtils.isNull(value)){
+        if (!StrUtils.isNull(value)){
             map.put(name, message);
         }
     }

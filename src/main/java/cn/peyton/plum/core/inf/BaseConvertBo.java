@@ -2,7 +2,6 @@ package cn.peyton.plum.core.inf;
 
 
 import cn.peyton.plum.core.inf.bo.IBo;
-import cn.peyton.plum.core.utils.CheckedUtils;
 import cn.peyton.plum.core.utils.DateUtils;
 import cn.peyton.plum.core.utils.base.Lists;
 
@@ -52,7 +51,7 @@ public abstract class BaseConvertBo<P, T> implements IBo<P, T>, Serializable {
     public List<P> adapter(List<T> list) {
 
         List<P> params = Lists.newArrayList();
-        if (CheckedUtils.isNotEmptyList(list)) {
+        if (Lists.isNotEmptyList(list)) {
             for (T t : list) {
                 params.add(compat(t));
             }
@@ -68,7 +67,7 @@ public abstract class BaseConvertBo<P, T> implements IBo<P, T>, Serializable {
      */
     public List<T> reverse(List<P> list) {
         List<T> params = Lists.newArrayList();
-        if (CheckedUtils.isNotEmptyList(list)) {
+        if (Lists.isNotEmptyList(list)) {
             for (P p : list) {
                 params.add(convert(p));
             }

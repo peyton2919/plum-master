@@ -2,7 +2,7 @@ package cn.peyton.plum.core.page;
 
 import cn.peyton.plum.core.inf.BaseConvertBo;
 import cn.peyton.plum.core.inf.mapper.IMapperPrimary;
-import cn.peyton.plum.core.utils.CheckedUtils;
+import cn.peyton.plum.core.utils.base.Lists;
 
 import java.io.Serializable;
 import java.util.List;
@@ -50,7 +50,7 @@ public final class PageResultAdapter<T> implements Serializable {
      */
     public static <T> PageResult<T> adapt(List<T> data, Integer count) {
         PageResult<T> result= new PageResult<T>();
-        if (CheckedUtils.isNotEmptyList(data)) {
+        if (Lists.isNotEmptyList(data)) {
             result.setData(data);
             result.setTotal(count);
         }

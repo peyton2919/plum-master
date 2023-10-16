@@ -1,6 +1,6 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.Regulation;
 import cn.peyton.plum.core.validator.constraints.Phone;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
@@ -24,7 +24,7 @@ public class PhoneStrategy extends AbstractValidator {
     public void compare(Annotation annotation, String name, String type, Object value, Map<String, String> map) {
         Phone phone = (Phone) annotation;
         message = phone.message();
-        if (CheckedUtils.isEmpty(value)) {
+        if (StrUtils.isEmpty(value)) {
             if (regex(value.toString(), Regulation.REGEX_PHONE)) {
                 map.put(name, message);
             }

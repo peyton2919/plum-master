@@ -1,6 +1,7 @@
 package cn.peyton.plum.core.validator;
 
 import cn.peyton.plum.core.err.GlobalException;
+import cn.peyton.plum.core.utils.LogUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -245,6 +246,7 @@ public final class Regulation implements Serializable {
             return  Pattern.matches(check,valiField);
         } catch (GlobalException e) {
             log.error("正则匹配异常: 匹配规则:{} , 匹配字段:{}",check,valiField);
+            LogUtils.error(check, "不匹配", valiField, e.getMessage());
         }
         return false;
     }

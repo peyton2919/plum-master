@@ -160,6 +160,8 @@ public class DruidConfiguration {
         // 开启监控页面的访问登录账号和密码
         servletRegistrationBean.addInitParameter("loginUsername", "admin");
         servletRegistrationBean.addInitParameter("loginPassword", "hc2919");
+        servletRegistrationBean.addInitParameter("allow","");//默认就是允许所有访问
+        //servletRegistrationBean.addInitParameter("deny","192.168.15.21");//拒绝相对应的id访问
         // 设置禁止清空内置监控页面数据信息
         servletRegistrationBean.addInitParameter("resetEnable","false");
         return servletRegistrationBean;

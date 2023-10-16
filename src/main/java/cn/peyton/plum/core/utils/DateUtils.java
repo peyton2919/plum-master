@@ -178,7 +178,7 @@ public final class DateUtils implements Serializable {
         try {
             return (int) (time/1000);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e.getMessage());
             return 0;
         }
     }

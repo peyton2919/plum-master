@@ -1,6 +1,6 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.constraints.Pattern;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
 
@@ -23,7 +23,7 @@ public class PatternStrategy extends AbstractValidator {
         Pattern pattern = (Pattern) annotation;
         message = pattern.message();
         String rule = pattern.regexp();
-        if (CheckedUtils.isEmpty(value)) {
+        if (StrUtils.isEmpty(value)) {
             if (regex(value.toString(), rule)) {
                 map.put(name, message);
             }

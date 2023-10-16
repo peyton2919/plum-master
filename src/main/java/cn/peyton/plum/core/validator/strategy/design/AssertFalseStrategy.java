@@ -1,6 +1,6 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.constraints.AssertFalse;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
 
@@ -28,7 +28,7 @@ public class AssertFalseStrategy extends AbstractValidator {
         if (!BOOL.equals(type) && !BOOLEAN.equals(type)){
             map.put(name, message);
         }
-        if (CheckedUtils.isEmpty(value)){
+        if (StrUtils.isEmpty(value)){
             if (!FALSE.equals(value.toString().trim())) {
                 map.put(name, message);
             }

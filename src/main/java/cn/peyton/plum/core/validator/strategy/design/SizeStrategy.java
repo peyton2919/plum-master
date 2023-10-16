@@ -1,7 +1,7 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
 import cn.peyton.plum.core.utils.LogUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.constraints.Size;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
 
@@ -29,7 +29,7 @@ public class SizeStrategy extends AbstractValidator {
             map.put(name, "设置值错误,max值 要大于 min值");
             return;
         }
-        if (CheckedUtils.isEmpty(value)) {
+        if (StrUtils.isEmpty(value)) {
             if (existInt(type)) {
                 map.put(name,"数据类型不正确");
                 return;

@@ -2,6 +2,9 @@ package cn.peyton.plum.core.validator;
 
 
 import cn.peyton.plum.core.err.ValidationException;
+import cn.peyton.plum.core.json.JSONResult;
+import cn.peyton.plum.core.page.ResponseStatus;
+import cn.peyton.plum.core.utils.LogUtils;
 import cn.peyton.plum.core.validator.strategy.BaseValidator;
 
 import java.io.Serializable;
@@ -82,7 +85,6 @@ public final class Validation implements Serializable {
                            String name, String type, String value,
                            boolean single) {
         if (single) {
-
             valid(errMap, annotations, name, type, value);
         } else {
             validator.validate(errMap, annotations, name, type, value,single);
@@ -117,7 +119,8 @@ public final class Validation implements Serializable {
             for(String key : errors.keySet()){
                 sb.append(errors.get(key) + "<br>");
             }
-            throw new ValidationException(sb.toString());
+            LogUtils.info(sb);
+            throw new ValidationException(JSONResult.error(ResponseStatus.VALIDATE_FAIL,sb));
         }
     }
 

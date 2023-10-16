@@ -1,6 +1,6 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.constraints.Length;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
 
@@ -29,7 +29,7 @@ public class LengthStrategy extends AbstractValidator {
             map.put(name, "设置值错误,max值 要大于 min值");
             return;
         }
-        if (CheckedUtils.isEmpty(value)) {
+        if (StrUtils.isEmpty(value)) {
             long le = value.toString().trim().length();
             if (le < min || le > max) {
                 map.put(name, message + "[取值范围:" + min + " ~ " + max + "之间]");

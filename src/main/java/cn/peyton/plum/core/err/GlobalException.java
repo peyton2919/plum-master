@@ -2,8 +2,8 @@ package cn.peyton.plum.core.err;
 
 import cn.peyton.plum.core.json.JSONResult;
 import cn.peyton.plum.core.json.JsonMapper;
-import cn.peyton.plum.core.utils.HttpServletResponseTools;
-import jakarta.servlet.http.HttpServletResponse;
+import cn.peyton.plum.core.utils.HttpServletResponseUtils;
+import cn.peyton.plum.core.utils.LogUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -44,22 +44,18 @@ public class GlobalException extends RuntimeException {
 
     /**
      * <h4>验证异常 PrintWriter 写出信息</h4>
-     * @param response response 对象
      * @param jsonResult jsonResult 对象{封装的数据}
      */
-    public GlobalException(HttpServletResponse response, JSONResult jsonResult) {
-        HttpServletResponseTools.returnJson(
-                response, JsonMapper.toJSon(jsonResult));
+    public GlobalException(JSONResult jsonResult) {
+        HttpServletResponseUtils.returnJson(JsonMapper.toJSon(jsonResult));
     }
 
     /**
      * <h4>异常构造</h4>
-     * @param response
      * @param result 要返回的包装好的JSON数据
      * @param url  链接地址 如: /err 或 /app/add
      */
-    public GlobalException(HttpServletResponse response, JSONResult result, String url) {
-
+    public GlobalException(JSONResult result, String url) {
         try {
             StringBuilder _sb = new StringBuilder();
             if (null != url) {
@@ -67,13 +63,12 @@ public class GlobalException extends RuntimeException {
                 if (null != result) {
                     _sb.append("?result=" + result);
                 }
-                response.sendRedirect(_sb.toString());
+                HttpServletResponseUtils.getResponse().sendRedirect(_sb.toString());
             }else {
-                HttpServletResponseTools.returnJson(
-                        response, JsonMapper.toJSon(result));
+                HttpServletResponseUtils.returnJson(JsonMapper.toJSon(result));
             }
         } catch (IOException e) {
-            log.error("异常在【cn.peyton.core.err.child.GlobelException】 构造方法。");
+            LogUtils.error(e.getMessage());
         }
     }
 }

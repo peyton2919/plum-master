@@ -56,6 +56,18 @@ public final class Lists<T,P>implements Serializable {
     }
 
     /**
+     * <h4>判断List 集合是否为空</h4>
+     * @param list 集合
+     * @return 不为空返回true
+     */
+    public static boolean isNotEmptyList(List<?> list) {
+        if (null != list && list.size() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * <h4>创建ArrayList对象</h4>
      * @param <T>
      * @return

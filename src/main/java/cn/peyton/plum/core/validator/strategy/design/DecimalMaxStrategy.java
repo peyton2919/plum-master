@@ -1,6 +1,6 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.constraints.DecimalMax;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
 
@@ -28,7 +28,7 @@ public class DecimalMaxStrategy extends AbstractValidator {
         DecimalMax decimalMax = (DecimalMax) annotation;
         message = decimalMax.message();
         BigDecimal max = new BigDecimal(decimalMax.value());
-        if (CheckedUtils.isEmpty(value)) {
+        if (StrUtils.isEmpty(value)) {
             BigDecimal bigDecimal = new BigDecimal(value.toString());
             if (bigDecimal.compareTo(max) > 0) {
                 map.put(name, message);

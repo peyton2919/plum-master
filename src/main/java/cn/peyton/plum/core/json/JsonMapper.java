@@ -1,5 +1,6 @@
 package cn.peyton.plum.core.json;
 
+import cn.peyton.plum.core.utils.LogUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -36,7 +37,7 @@ public final class JsonMapper implements Serializable {
 
             return objectMapper.readValue(jsonStr, valueType);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e.getMessage());
         }
 
         return null;
@@ -56,7 +57,7 @@ public final class JsonMapper implements Serializable {
         try {
             return objectMapper.readValue(jsonStr, valueTypeRef);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e.getMessage());
         }
 
         return null;
@@ -76,9 +77,8 @@ public final class JsonMapper implements Serializable {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e.getMessage());
         }
-
         return null;
     }
 }

@@ -1,6 +1,6 @@
 package cn.peyton.plum.core.validator.strategy.design;
 
-import cn.peyton.plum.core.utils.CheckedUtils;
+import cn.peyton.plum.core.utils.StrUtils;
 import cn.peyton.plum.core.validator.constraints.AssertTrue;
 import cn.peyton.plum.core.validator.strategy.AbstractValidator;
 
@@ -29,7 +29,7 @@ public class AssertTrueStrategy extends AbstractValidator {
             map.put(name, message);
             return;
         }
-        if (CheckedUtils.isEmpty(value)){
+        if (StrUtils.isEmpty(value)){
             if (!TRUE.equals(value.toString().trim())) {
                 map.put(name, message);
             }

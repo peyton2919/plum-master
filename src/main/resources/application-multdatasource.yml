@@ -15,7 +15,7 @@ spring:     #多数据源
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://localhost:3306/db_chatter?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+        url: jdbc:mysql://localhost:3306/db_test?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
         username: root
         password: hc2919
 
@@ -71,6 +71,8 @@ spring:     #多数据源
         #login-username: admin
         # 登录密码
         #login-password: 111111
+  messages:
+    basename: i18n.login
 mybatis:
   mapper-locations: classpath:mappers/*Mapper.xml   # 所有 mapper 映射的文件所在目录位置 cn/peyton/children/chatter/
   type-aliases-package: cn.peyton.children.chatter.pojo
