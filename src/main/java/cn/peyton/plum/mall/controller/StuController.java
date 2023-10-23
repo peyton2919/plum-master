@@ -3,13 +3,17 @@ package cn.peyton.plum.mall.controller;
 import cn.peyton.plum.core.anno.auth.Permission;
 import cn.peyton.plum.core.json.JSONResult;
 import cn.peyton.plum.core.utils.HttpServletRequestUtils;
+import cn.peyton.plum.mall.controller.base.AppController;
 import cn.peyton.plum.mall.pojo.Stu;
+import cn.peyton.plum.mall.pojo.Sup;
 import cn.peyton.plum.mall.service.StuService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
 
 /**
  * <h4></h4>
@@ -21,8 +25,8 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @version 1.0.0
  * </pre>
  */
-@Controller
-public class StuController {
+@RestController
+public class StuController extends AppController {
     @Value("${login.username}")
     public String UN;
 
@@ -34,6 +38,7 @@ public class StuController {
     public JSONResult<Stu> add(Stu stu) {
         return JSONResult.success(stuService.add(stu));
     }
+
     @GetMapping("/finds")
     public JSONResult finds() {
         return JSONResult.success(stuService.finds());
@@ -54,6 +59,28 @@ public class StuController {
         String temp = UN;
         HttpServletRequestUtils.getRequest().getSession().setAttribute("stu", stu);
         return "redirect:/checked";
+    }
+    @GetMapping("/settoken")
+    public String settoken() {
+        Sup sup = new Sup();
+        sup.setCreateTime(new Date());
+        sup.setId(1);
+        sup.setSex(0);
+        sup.setName("judy");
+        String token = saveToken(sup);
+        System.out.println(token);
+        sup.setToken(token);
+        return "ok";
+    }
+
+    @GetMapping("/gettoken")
+    public JSONResult gettoken(HttpServletRequest re) {
+       verifyTokenAndVoluation(re,new Sup());
+       Sup _sup = (Sup) baseUser;
+        if (null != _sup) {
+            System.out.println(_sup.getName());
+        }
+        return  JSONResult.success(_sup);
     }
 
     @GetMapping("/err")

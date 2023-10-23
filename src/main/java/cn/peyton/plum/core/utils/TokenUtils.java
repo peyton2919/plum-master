@@ -431,7 +431,7 @@ public class TokenUtils<T> implements Serializable {
         /** 时间 key */
         String TIMESTAMP = "timestamp";
         /** Token key */
-        String ACCESS_TOKEN = "ACCESS_TOKEN";
+        String TOKEN = "token";
     }
     // **************************************** get and set **************************************** //
 }

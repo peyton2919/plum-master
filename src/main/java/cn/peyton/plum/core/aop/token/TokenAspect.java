@@ -53,7 +53,7 @@ public class TokenAspect {
         if (null != _token) {
             _response.setCharacterEncoding("UTF-8");
             TokenUtils tokenUtils = new TokenUtils();
-            String accessToken = _request.getHeader(TokenUtils.Property.ACCESS_TOKEN);
+            String accessToken = _request.getHeader(TokenUtils.Property.TOKEN);
             if (null == accessToken) {
                 return JSONResult.fail(ResponseStatus.TOKEN_ILLEGAL);
             } else {

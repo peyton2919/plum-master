@@ -8,6 +8,9 @@ import java.lang.annotation.Target;
 /**
  * <h4>权限 注释类</h4>
  * <pre>
+ *     配合 AuthenticationAspect 使用
+ * </pre>
+ * <pre>
  * @author <a href="http://www.peyton.cn">peyton</a>
  * @mail <a href="mailto:fz2919@tom.com">fz2919@tom.com</a>
  * @name cn.peyton.plum.core.anno.auth.Permission
