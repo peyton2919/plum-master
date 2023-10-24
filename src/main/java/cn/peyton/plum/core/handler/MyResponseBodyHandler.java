@@ -35,8 +35,9 @@ import java.util.List;
  */
 @ControllerAdvice
 public class MyResponseBodyHandler implements ResponseBodyAdvice<Object> {
-    //@Value("${web.host}")
+    //@Value("${web.host}")   // 在application.yml 中配置 web.host
     //private String HOST;
+    /** 根目录 */
     private String basePath;
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -70,15 +71,63 @@ public class MyResponseBodyHandler implements ResponseBodyAdvice<Object> {
                 List<?> _objects = (List<?>) _object;
                 if(null != _objects && _objects.size()>0){
                     for (Object _obj : _objects) {
-                         addImgPathPrefix(_obj);
+                        try {
+                            int count = 0;
+                            recurrence(_obj,count);
+                        } catch (IllegalAccessException e) {
+                            LogUtils.error(e.getMessage());
+                        }
                     }
                 }
             }else if (_object instanceof Class<?>){
-                 addImgPathPrefix(_object);
+                try {
+                    int count = 0;
+                    recurrence(_object,count);
+                } catch (IllegalAccessException e) {
+                    LogUtils.error(e.getMessage());
+                }
             }
         }
         return body;
     }
+
+    /**
+     * <h4>递归查找 标记 @ImageHostPath 注解</h4>
+     * <pre>
+     *     递归最多10次
+     * </pre>
+     * @param obj
+     * @throws IllegalAccessException
+     */
+    private void recurrence(Object obj,int count) throws IllegalAccessException {
+        count ++;
+        if(count > 10){
+            return;
+        }
+        Field[] declaredFields = obj.getClass().getDeclaredFields();
+        if (declaredFields != null) {
+            for (Field field : declaredFields) {
+                Class<?> type = field.getType();
+                String name = type.getName();
+                if (name.contains("cn.peyton")) {
+                    // 设置
+                    field.setAccessible(true);
+                    Object fieldObj = field.get(obj);
+                    // 调用递归
+                    recurrence(fieldObj,count);
+                    addImgPathPrefix(obj);
+                } else if (("java.util.List").equals(name)) {
+                    field.setAccessible(true);
+                    List<Object> listObj = (List<Object>) field.get(obj);
+                    for (Object lo : listObj) {
+                        int _tmpCount = 0;
+                        recurrence(lo,_tmpCount);
+                    }
+                }
+            }
+        }
+    }
+
 
     /**
      * <h4>添加图片 前缀</h4>

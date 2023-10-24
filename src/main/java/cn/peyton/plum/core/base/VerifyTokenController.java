@@ -2,13 +2,12 @@ package cn.peyton.plum.core.base;
 
 import cn.peyton.plum.core.json.JSONResult;
 import cn.peyton.plum.core.page.ResponseStatus;
-import cn.peyton.plum.core.users.IUser;
 import cn.peyton.plum.core.utils.LogUtils;
 import cn.peyton.plum.core.utils.TokenUtils;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * <h4>需要 验证 token controller 逻辑类</h4>
+ * <h4>需要 验证用户 token controller 可继承此逻辑类</h4>
  * <pre>
  *     注意：
  *     1. 用户信息需要保存, 验证 token 时, controller 层 需要继承此类;
@@ -25,7 +24,7 @@ import jakarta.servlet.http.HttpServletRequest;
  * @version 1.0.0
  * </pre>
  */
-public abstract class VerifyTokenController {
+public abstract class VerifyTokenController<IUser> {
     /** 当前用户 */
     protected IUser baseUser;
     /** token 值 */
